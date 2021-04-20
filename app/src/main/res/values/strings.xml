@@ -4,6 +4,8 @@
     <string name="text_easy">Easy</string>
     <string name="text_hard">Hard</string>
     <string name="text_start">시작</string>
+    <string name="text_password">비밀번호</string>
+    <string name="text_get_in">들어가기</string>
 
     <string name="message_select_mode">모드를 선택해주세요</string>
 </resources>

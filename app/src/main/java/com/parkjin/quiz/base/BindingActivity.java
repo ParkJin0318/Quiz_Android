@@ -1,19 +1,20 @@
-package com.parkjin.quiz;
+package com.parkjin.quiz.base;
 
 import android.os.Bundle;
 import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import com.parkjin.quiz.BR;
 
-abstract class BindingActivity<VB extends ViewDataBinding> extends AppCompatActivity {
+public abstract class BindingActivity<VB extends ViewDataBinding> extends AppCompatActivity {
 
     protected VB binding;
 
     @LayoutRes
-    abstract int getLayoutRes();
+    public abstract int getLayoutRes();
 
-    abstract void observeLiveData();
+    public abstract void observeLiveData();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +25,7 @@ abstract class BindingActivity<VB extends ViewDataBinding> extends AppCompatActi
 
     private void setBinding() {
         binding = DataBindingUtil.setContentView(this, getLayoutRes());
-        binding.setVariable(BR.activity, this);
+        binding.setVariable(BR.view, this);
         binding.setLifecycleOwner(this);
         binding.executePendingBindings();
     }

@@ -1,13 +1,16 @@
 package com.parkjin.quiz;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.lifecycle.MutableLiveData;
+
+import com.parkjin.quiz.base.BindingActivity;
 import com.parkjin.quiz.databinding.ActivityMainBinding;
 
 public class MainActivity extends BindingActivity<ActivityMainBinding> {
 
     @Override
-    int getLayoutRes() {
+    public int getLayoutRes() {
         return R.layout.activity_main;
     }
 
@@ -22,7 +25,7 @@ public class MainActivity extends BindingActivity<ActivityMainBinding> {
     }
 
     @Override
-    void observeLiveData() {
+    public void observeLiveData() {
         easyRadio.observe(this, isChecked -> {
             if (isChecked) {
                 modeText.setValue(getString(R.string.text_easy));
@@ -34,6 +37,12 @@ public class MainActivity extends BindingActivity<ActivityMainBinding> {
                 modeText.setValue(getString(R.string.text_hard));
             }
         });
+    }
+
+    public void onClickSettings() {
+        Intent intent = new Intent(this, QuestionListActivity.class)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     public void onClickEasy() {
