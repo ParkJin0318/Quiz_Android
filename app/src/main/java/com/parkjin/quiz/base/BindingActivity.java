@@ -7,27 +7,38 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import com.parkjin.quiz.BR;
 
-public abstract class BindingActivity<VB extends ViewDataBinding> extends AppCompatActivity {
+public abstract class BindingActivity<VB extends ViewDataBinding, VM extends BaseViewModel> extends AppCompatActivity {
 
     protected VB binding;
+    protected VM viewModel;
+    protected abstract VM viewModel();
 
     @LayoutRes
     public abstract int getLayoutRes();
 
-    public abstract void observeLiveData();
+    public abstract void observeEvent();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setBinding();
-        this.observeLiveData();
+        this.observeEvent();
     }
 
     private void setBinding() {
         binding = DataBindingUtil.setContentView(this, getLayoutRes());
-        binding.setVariable(BR.view, this);
+        viewModel = getViewModel();
+        binding.setVariable(BR.viewModel, viewModel);
         binding.setLifecycleOwner(this);
         binding.executePendingBindings();
+    }
+
+    private VM getViewModel() {
+        if (viewModel != null) {
+            return viewModel;
+        } else {
+            return viewModel();
+        }
     }
 
     @Override
