@@ -1,16 +1,19 @@
 package com.parkjin.quiz.base;
 
 import android.os.Bundle;
+
 import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+
 import com.parkjin.quiz.BR;
 
-public abstract class BindingActivity<VB extends ViewDataBinding, VM extends BaseViewModel> extends AppCompatActivity {
+public abstract class BaseActivity<VB extends ViewDataBinding, VM extends BaseViewModel> extends AppCompatActivity {
 
     protected VB binding;
     protected VM viewModel;
+
     protected abstract VM viewModel();
 
     @LayoutRes

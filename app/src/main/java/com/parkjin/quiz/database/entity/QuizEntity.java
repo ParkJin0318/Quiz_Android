@@ -5,10 +5,16 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "quiz_table")
 public class QuizEntity {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    public int idx;
     public String title;
-
-    public String date;
-
+    public int score;
     public int type;
+    public String createAt;
+
+    public String quiz1;
+    public String quiz2;
+    public String quiz3;
+    public String quiz4;
+    public int answer;
 }

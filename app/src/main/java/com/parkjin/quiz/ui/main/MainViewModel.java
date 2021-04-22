@@ -1,6 +1,7 @@
 package com.parkjin.quiz.ui.main;
 
 import androidx.lifecycle.MutableLiveData;
+
 import com.parkjin.quiz.base.BaseViewModel;
 import com.parkjin.quiz.util.SingleLiveEvent;
 

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.question.QuestionActivity">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.parkjin.quiz.ui.question.QuestionViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:text="@string/app_name"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@={viewModel.isQuizType}"
+                android:textOff="@string/text"
+                android:textOn="@string/image" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.insertQuiz()}"
+                android:text="@string/text_save" />
+        </LinearLayout>
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_margin="20dp"
+           android:orientation="vertical">
+
+           <com.google.android.material.textfield.TextInputLayout
+               style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_margin="10dp">
+
+               <com.google.android.material.textfield.TextInputEditText
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:singleLine="true"
+                   android:text="@={viewModel.title}"
+                   android:hint="@string/text_question" />
+           </com.google.android.material.textfield.TextInputLayout>
+
+           <com.google.android.material.textfield.TextInputLayout
+               style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_margin="10dp">
+
+               <com.google.android.material.textfield.TextInputEditText
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:inputType="number"
+                   android:singleLine="true"
+                   android:text="@={viewModel.score}"
+                   android:hint="@string/text_score" />
+           </com.google.android.material.textfield.TextInputLayout>
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_margin="10dp">
+
+               <RadioButton
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:checked="@{viewModel.quiz1Checked}"
+                   android:onClick="@{() -> viewModel.onClickQuiz(1)}"/>
+
+               <EditText
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:hint="@string/text_view"
+                   android:text="@={viewModel.quiz1}"
+                   android:singleLine="true" />
+           </LinearLayout>
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_margin="10dp">
+
+               <RadioButton
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:checked="@{viewModel.quiz2Checked}"
+                   android:onClick="@{() -> viewModel.onClickQuiz(2)}" />
+
+               <EditText
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:hint="@string/text_view"
+                   android:text="@={viewModel.quiz2}"
+                   android:singleLine="true" />
+           </LinearLayout>
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_margin="10dp">
+
+               <RadioButton
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:checked="@{viewModel.quiz3Checked}"
+                   android:onClick="@{() -> viewModel.onClickQuiz(3)}" />
+
+               <EditText
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:hint="@string/text_view"
+                   android:text="@={viewModel.quiz3}"
+                   android:singleLine="true" />
+           </LinearLayout>
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_margin="10dp">
+
+               <RadioButton
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:checked="@{viewModel.quiz4Checked}"
+                   android:onClick="@{() -> viewModel.onClickQuiz(4)}" />
+
+               <EditText
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:hint="@string/text_view"
+                   android:text="@={viewModel.quiz4}"
+                   android:singleLine="true" />
+           </LinearLayout>
+
+       </LinearLayout>
+    </LinearLayout>
+</layout>

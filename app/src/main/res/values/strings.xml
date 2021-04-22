@@ -1,11 +1,19 @@
 <resources>
     <string name="app_name">Quiz</string>
 
+    <string name="text">TEXT</string>
+    <string name="image">IMAGE</string>
+
     <string name="text_easy">Easy</string>
     <string name="text_hard">Hard</string>
     <string name="text_start">시작</string>
     <string name="text_password">비밀번호</string>
     <string name="text_get_in">들어가기</string>
+    
+    <string name="text_question">문제</string>
+    <string name="text_score">점수</string>
+    <string name="text_view">보기</string>
+    <string name="text_save">저장</string>
 
     <string name="message_select_mode">모드를 선택해주세요</string>
 </resources>

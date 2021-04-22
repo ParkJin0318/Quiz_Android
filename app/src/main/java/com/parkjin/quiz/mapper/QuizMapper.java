@@ -8,12 +8,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuizMapper {
-
     /**
      * Entity -> Model
      */
     public Quiz toModel(QuizEntity quizEntity) {
-        return new Quiz(quizEntity.title, quizEntity.date, toType(quizEntity.type));
+        return new Quiz(
+                quizEntity.idx,
+                quizEntity.title,
+                quizEntity.score,
+                toType(quizEntity.type),
+                quizEntity.createAt,
+                quizEntity.quiz1,
+                quizEntity.quiz2,
+                quizEntity.quiz3,
+                quizEntity.quiz4,
+                quizEntity.answer
+        );
     }
 
     /**
@@ -22,8 +32,14 @@ public class QuizMapper {
     public QuizEntity toEntity(Quiz quiz) {
         QuizEntity entity = new QuizEntity();
         entity.title = quiz.getTitle();
+        entity.score = quiz.getScore();
         entity.type = toValue(quiz.getType());
-        entity.date = quiz.getDate();
+        entity.createAt = quiz.getCreateAt();
+        entity.quiz1 = quiz.getQuiz1();
+        entity.quiz2 = quiz.getQuiz2();
+        entity.quiz3 = quiz.getQuiz3();
+        entity.quiz4 = quiz.getQuiz4();
+        entity.answer = quiz.getAnswer();
         return entity;
     }
 
@@ -33,7 +49,7 @@ public class QuizMapper {
     public List<Quiz> toModelList(List<QuizEntity> entityList) {
         ArrayList<Quiz> modelList = new ArrayList<>();
 
-        for (QuizEntity entity: entityList) {
+        for (QuizEntity entity : entityList) {
             modelList.add(toModel(entity));
         }
         return modelList;
@@ -45,7 +61,7 @@ public class QuizMapper {
     public List<QuizEntity> toEntityList(List<Quiz> modelList) {
         ArrayList<QuizEntity> entityList = new ArrayList<>();
 
-        for (Quiz model: modelList) {
+        for (Quiz model : modelList) {
             entityList.add(toEntity(model));
         }
         return entityList;
@@ -54,7 +70,7 @@ public class QuizMapper {
     /**
      * Enum -> Int
      */
-    private int toValue(QuizType type) {
+    public int toValue(QuizType type) {
         if (type == QuizType.TEXT) {
             return 0;
         } else {
@@ -65,8 +81,19 @@ public class QuizMapper {
     /**
      * Int -> Enum
      */
-    private QuizType toType(int value) {
+    public QuizType toType(int value) {
         if (value == 0) {
+            return QuizType.TEXT;
+        } else {
+            return QuizType.IMAGE;
+        }
+    }
+
+    /**
+     * Boolean -> Enum
+     */
+    public QuizType toType(boolean value) {
+        if (!value) {
             return QuizType.TEXT;
         } else {
             return QuizType.IMAGE;

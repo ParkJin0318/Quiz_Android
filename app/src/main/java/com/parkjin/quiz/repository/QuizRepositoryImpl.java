@@ -3,6 +3,7 @@ package com.parkjin.quiz.repository;
 import com.parkjin.quiz.database.dao.QuizDao;
 import com.parkjin.quiz.mapper.QuizMapper;
 import com.parkjin.quiz.model.Quiz;
+
 import java.util.List;
 
 import javax.inject.Inject;
