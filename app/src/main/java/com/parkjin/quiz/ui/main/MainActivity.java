@@ -8,7 +8,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.parkjin.quiz.R;
 import com.parkjin.quiz.base.BaseActivity;
 import com.parkjin.quiz.databinding.ActivityMainBinding;
+import com.parkjin.quiz.model.QuizType;
 import com.parkjin.quiz.ui.question_list.QuestionListActivity;
+import com.parkjin.quiz.ui.quiz.QuizActivity;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -48,6 +50,13 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         viewModel.onSettingEvent.observe(this, empty -> {
             Intent intent = new Intent(this, QuestionListActivity.class)
                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        });
+
+        viewModel.onStartEvent.observe(this, unit -> {
+            Intent intent = new Intent(this, QuizActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    .putExtra("mode", viewModel.modeText.getValue());
             startActivity(intent);
         });
     }

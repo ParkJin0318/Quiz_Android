@@ -1,7 +1,5 @@
 package com.parkjin.quiz.ui.question;
 
-import android.net.Uri;
-
 import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.MutableLiveData;
 
@@ -15,6 +13,10 @@ import com.parkjin.quiz.util.SingleLiveEvent;
 
 import java.util.Date;
 
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Scheduler;
+import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -74,14 +76,14 @@ public class QuestionViewModel extends BaseViewModel {
     }
 
     private void setQuizInfo(Quiz quiz) {
-        title.setValue(quiz.getTitle());
-        score.setValue(String.valueOf(quiz.getScore()));
-        isQuizType.setValue(quiz.getType() == QuizType.IMAGE);
+        title.postValue(quiz.getTitle());
+        score.postValue(String.valueOf(quiz.getScore()));
+        quiz1.postValue(quiz.getQuiz1());
+        quiz2.postValue(quiz.getQuiz2());
+        quiz3.postValue(quiz.getQuiz3());
+        quiz4.postValue(quiz.getQuiz4());
 
-        quiz1.setValue(quiz.getQuiz1());
-        quiz2.setValue(quiz.getQuiz2());
-        quiz3.setValue(quiz.getQuiz3());
-        quiz4.setValue(quiz.getQuiz4());
+        isQuizType.setValue(quiz.getType() == QuizType.IMAGE);
         onClickQuiz(quiz.getAnswer());
     }
 

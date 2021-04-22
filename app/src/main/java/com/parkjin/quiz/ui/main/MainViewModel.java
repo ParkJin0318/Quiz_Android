@@ -8,10 +8,12 @@ import com.parkjin.quiz.util.SingleLiveEvent;
 public class MainViewModel extends BaseViewModel {
 
     public MutableLiveData<String> modeText = new MutableLiveData<>("");
+
     public MutableLiveData<Boolean> easyRadio = new MutableLiveData<>(false);
     public MutableLiveData<Boolean> hardRadio = new MutableLiveData<>(false);
 
     public SingleLiveEvent<Void> onSettingEvent = new SingleLiveEvent<>();
+    public SingleLiveEvent<Void> onStartEvent = new SingleLiveEvent<>();
 
     public void onClickSettings() {
         onSettingEvent.call();
@@ -28,6 +30,6 @@ public class MainViewModel extends BaseViewModel {
     }
 
     public void onClickStart() {
-
+        onStartEvent.call();
     }
 }
