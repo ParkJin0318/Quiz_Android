@@ -1,5 +1,7 @@
 package com.parkjin.quiz.ui.question;
 
+import android.net.Uri;
+
 import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.MutableLiveData;
 
@@ -18,6 +20,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class QuestionViewModel extends BaseViewModel {
 
+    public int idx;
     public MutableLiveData<String> title = new MutableLiveData<>("");
     public MutableLiveData<String> score = new MutableLiveData<>("");
     public MutableLiveData<Boolean> isQuizType = new MutableLiveData<>(false);
@@ -33,6 +36,7 @@ public class QuestionViewModel extends BaseViewModel {
     public MutableLiveData<Boolean> quiz4Checked = new MutableLiveData<>(false);
     public MutableLiveData<Integer> answer = new MutableLiveData<>();
 
+    public SingleLiveEvent<Integer> onImageOpenEvent = new SingleLiveEvent<>();
     public SingleLiveEvent<Void> onSuccessEvent = new SingleLiveEvent<>();
     public SingleLiveEvent<String> onErrorEvent = new SingleLiveEvent<>();
 
@@ -45,12 +49,25 @@ public class QuestionViewModel extends BaseViewModel {
         this.repository = repository;
     }
 
-    public void getQuiz(int idx) {
+    public void getQuiz() {
+        if (idx == 0) return;
+
         addDisposable(repository.getQuiz(idx)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         this::setQuizInfo,
+                        error -> onErrorEvent.setValue(error.getMessage())
+                )
+        );
+    }
+
+    public void insertQuiz(Quiz quiz) {
+        addDisposable(repository.insertQuiz(quiz)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        () -> onSuccessEvent.call(),
                         error -> onErrorEvent.setValue(error.getMessage())
                 )
         );
@@ -68,17 +85,6 @@ public class QuestionViewModel extends BaseViewModel {
         onClickQuiz(quiz.getAnswer());
     }
 
-    public void insertQuiz(Quiz quiz) {
-        addDisposable(repository.insertQuiz(quiz)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        () -> onSuccessEvent.call(),
-                        error -> onErrorEvent.setValue(error.getMessage())
-                )
-        );
-    }
-
     public void onClickSave() {
         if (title.getValue().isEmpty() || score.getValue().isEmpty() || quiz1.getValue().isEmpty() ||
             quiz2.getValue().isEmpty() || quiz3.getValue().isEmpty() || quiz4.getValue().isEmpty()) {
@@ -88,7 +94,7 @@ public class QuestionViewModel extends BaseViewModel {
         }
 
         Quiz quiz = new Quiz(
-                0,
+                idx,
                 title.getValue(),
                 Integer.parseInt(score.getValue()),
                 quizMapper.toType(isQuizType.getValue()),
@@ -125,5 +131,26 @@ public class QuestionViewModel extends BaseViewModel {
                 quiz4Checked.setValue(true);
                 break;
         }
+    }
+
+    public void setUri(int quiz, String uri) {
+        switch (quiz) {
+            case 1:
+                quiz1.setValue(uri);
+                break;
+            case 2:
+                quiz2.setValue(uri);
+                break;
+            case 3:
+                quiz3.setValue(uri);
+                break;
+            case 4:
+                quiz4.setValue(uri);
+                break;
+        }
+    }
+
+    public void onClickImage(int quiz) {
+        onImageOpenEvent.setValue(quiz);
     }
 }

@@ -5,6 +5,7 @@
     tools:context=".ui.question.QuestionActivity">
 
     <data>
+        <import type="android.view.View" />
 
         <variable
             name="viewModel"
@@ -86,6 +87,7 @@
            <LinearLayout
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
+               android:orientation="horizontal"
                android:layout_margin="10dp">
 
                <RadioButton
@@ -99,12 +101,34 @@
                    android:layout_height="wrap_content"
                    android:hint="@string/text_view"
                    android:text="@={viewModel.quiz1}"
-                   android:singleLine="true" />
+                   android:singleLine="true"
+                   android:visibility="@{viewModel.isQuizType ? View.GONE : View.VISIBLE}"
+                   tools:visibility="gone" />
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:visibility="@{viewModel.isQuizType ? View.VISIBLE : View.GONE}"
+                   tools:visibility="visible">
+
+                   <Button
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:onClick="@{() -> viewModel.onClickImage(1)}"
+                       android:text="@string/image" />
+
+                   <ImageView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:uri="@{viewModel.quiz1}"
+                       tools:src="@drawable/ic_launcher_background"/>
+               </LinearLayout>
            </LinearLayout>
 
            <LinearLayout
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
+               android:orientation="horizontal"
                android:layout_margin="10dp">
 
                <RadioButton
@@ -118,12 +142,34 @@
                    android:layout_height="wrap_content"
                    android:hint="@string/text_view"
                    android:text="@={viewModel.quiz2}"
-                   android:singleLine="true" />
+                   android:singleLine="true"
+                   android:visibility="@{viewModel.isQuizType ? View.GONE : View.VISIBLE}"
+                   tools:visibility="gone" />
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:visibility="@{viewModel.isQuizType ? View.VISIBLE : View.GONE}"
+                   tools:visibility="visible">
+
+                   <Button
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:onClick="@{() -> viewModel.onClickImage(2)}"
+                       android:text="@string/image" />
+
+                   <ImageView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:uri="@{viewModel.quiz2}"
+                       tools:src="@drawable/ic_launcher_background"/>
+               </LinearLayout>
            </LinearLayout>
 
            <LinearLayout
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
+               android:orientation="horizontal"
                android:layout_margin="10dp">
 
                <RadioButton
@@ -137,12 +183,34 @@
                    android:layout_height="wrap_content"
                    android:hint="@string/text_view"
                    android:text="@={viewModel.quiz3}"
-                   android:singleLine="true" />
+                   android:singleLine="true"
+                   android:visibility="@{viewModel.isQuizType ? View.GONE : View.VISIBLE}"
+                   tools:visibility="gone" />
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:visibility="@{viewModel.isQuizType ? View.VISIBLE : View.GONE}"
+                   tools:visibility="visible">
+
+                   <Button
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:onClick="@{() -> viewModel.onClickImage(3)}"
+                       android:text="@string/image" />
+
+                   <ImageView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:uri="@{viewModel.quiz3}"
+                       tools:src="@drawable/ic_launcher_background"/>
+               </LinearLayout>
            </LinearLayout>
 
            <LinearLayout
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
+               android:orientation="horizontal"
                android:layout_margin="10dp">
 
                <RadioButton
@@ -156,7 +224,28 @@
                    android:layout_height="wrap_content"
                    android:hint="@string/text_view"
                    android:text="@={viewModel.quiz4}"
-                   android:singleLine="true" />
+                   android:singleLine="true"
+                   android:visibility="@{viewModel.isQuizType ? View.GONE : View.VISIBLE}"
+                   tools:visibility="gone" />
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:visibility="@{viewModel.isQuizType ? View.VISIBLE : View.GONE}"
+                   tools:visibility="visible">
+
+                   <Button
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:onClick="@{() -> viewModel.onClickImage(4)}"
+                       android:text="@string/image" />
+
+                   <ImageView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:uri="@{viewModel.quiz4}"
+                       tools:src="@drawable/ic_launcher_background"/>
+               </LinearLayout>
            </LinearLayout>
 
        </LinearLayout>

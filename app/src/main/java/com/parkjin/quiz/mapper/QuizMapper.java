@@ -31,6 +31,7 @@ public class QuizMapper {
      */
     public QuizEntity toEntity(Quiz quiz) {
         QuizEntity entity = new QuizEntity();
+        entity.idx = quiz.getIdx();
         entity.title = quiz.getTitle();
         entity.score = quiz.getScore();
         entity.type = toValue(quiz.getType());
