@@ -24,6 +24,9 @@ public interface QuizDao {
     @Query("SELECT * FROM quiz_table")
     Single<List<QuizEntity>> getAllQuiz();
 
+    @Query("SELECT * FROM quiz_table WHERE idx = :idx")
+    Single<QuizEntity> getQuiz(int idx);
+
     @Delete
     Completable deleteQuiz(QuizEntity quizEntity);
 

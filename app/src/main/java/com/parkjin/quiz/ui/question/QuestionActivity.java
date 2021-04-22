@@ -1,5 +1,6 @@
 package com.parkjin.quiz.ui.question;
 
+import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -21,6 +22,15 @@ public class QuestionActivity extends BaseActivity<ActivityQuestionBinding, Ques
     @Override
     public int getLayoutRes() {
         return R.layout.activity_question;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        int idx = getIntent().getIntExtra("idx", -1);
+        if (idx != -1) {
+            viewModel.getQuiz(idx);
+        }
     }
 
     @Override

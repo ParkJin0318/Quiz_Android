@@ -10,18 +10,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.parkjin.quiz.R;
 import com.parkjin.quiz.databinding.ItemQuizBinding;
 import com.parkjin.quiz.model.Quiz;
+import com.parkjin.quiz.util.SingleLiveEvent;
 
 import java.util.List;
 
-public class QuestionItemAdapter extends RecyclerView.Adapter<QuestionItemAdapter.ViewHolder> {
+public class QuestionItemAdapter extends RecyclerView.Adapter<QuestionItemAdapter.ViewHolder>
+        implements QuestionItemNavigator {
 
     private List<Quiz> quizList;
+    public SingleLiveEvent<Quiz> onClickItem = new SingleLiveEvent<>();
 
     public void setQuizList(List<Quiz> quizList) {
         this.quizList = quizList;
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public void onClickItem(Quiz quiz) {
+        onClickItem.setValue(quiz);
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         private final ItemQuizBinding binding;
         private final QuestionItemViewModel viewModel = new QuestionItemViewModel();
 
@@ -30,8 +38,9 @@ public class QuestionItemAdapter extends RecyclerView.Adapter<QuestionItemAdapte
             this.binding = binding;
         }
 
-        public void bind(Quiz quiz) {
+        public void bind(QuestionItemAdapter adapter, Quiz quiz) {
             viewModel.bind(quiz);
+            viewModel.setNavigator(adapter);
             binding.setViewModel(viewModel);
         }
     }
@@ -49,13 +58,14 @@ public class QuestionItemAdapter extends RecyclerView.Adapter<QuestionItemAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.bind(quizList.get(position));
+        holder.bind(this, quizList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        if (quizList == null) return 0;
-
+        if (quizList == null) {
+            return 0;
+        }
         return quizList.size();
     }
 }

@@ -2,6 +2,7 @@ package com.parkjin.quiz.ui.question_list;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -33,6 +34,13 @@ public class QuestionListActivity extends BaseActivity<ActivityQuestionListBindi
 
     @Override
     public void observeEvent() {
+        viewModel.quizAdapter.onClickItem.observe(this, quiz -> {
+            Intent intent = new Intent(this, QuestionActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("idx", quiz.getIdx());
+            startActivity(intent);
+        });
+
         viewModel.onPasswordError.observe(this, unit -> {
             this.finish();
         });

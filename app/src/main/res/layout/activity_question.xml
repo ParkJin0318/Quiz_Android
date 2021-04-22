@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.question.QuestionActivity">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.parkjin.quiz.ui.question.QuestionViewModel" />
@@ -44,7 +44,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> viewModel.insertQuiz()}"
+                android:onClick="@{() -> viewModel.onClickSave()}"
                 android:text="@string/text_save" />
         </LinearLayout>
 

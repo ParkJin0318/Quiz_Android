@@ -37,6 +37,11 @@ public class QuizRepositoryImpl implements QuizRepository {
     }
 
     @Override
+    public Single<Quiz> getQuiz(int idx) {
+        return dao.getQuiz(idx).map(mapper::toModel);
+    }
+
+    @Override
     public Completable deleteQuiz(Quiz quiz) {
         return dao.deleteQuiz(mapper.toEntity(quiz));
     }

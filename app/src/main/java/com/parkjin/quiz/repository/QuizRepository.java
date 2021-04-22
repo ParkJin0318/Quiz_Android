@@ -14,6 +14,8 @@ public interface QuizRepository {
 
     Single<List<Quiz>> getAllQuiz();
 
+    Single<Quiz> getQuiz(int idx);
+
     Completable deleteQuiz(Quiz quiz);
 
     Completable deleteAllQuiz();
