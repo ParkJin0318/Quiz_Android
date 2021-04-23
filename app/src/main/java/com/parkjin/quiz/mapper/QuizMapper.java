@@ -18,10 +18,10 @@ public class QuizMapper {
                 quizEntity.score,
                 toType(quizEntity.type),
                 quizEntity.createAt,
-                quizEntity.quiz1,
-                quizEntity.quiz2,
-                quizEntity.quiz3,
-                quizEntity.quiz4,
+                quizEntity.question1,
+                quizEntity.question2,
+                quizEntity.question3,
+                quizEntity.question4,
                 quizEntity.answer
         );
     }
@@ -30,18 +30,18 @@ public class QuizMapper {
      * Model -> Entity
      */
     public QuizEntity toEntity(Quiz quiz) {
-        QuizEntity entity = new QuizEntity();
-        entity.idx = quiz.getIdx();
-        entity.title = quiz.getTitle();
-        entity.score = quiz.getScore();
-        entity.type = toValue(quiz.getType());
-        entity.createAt = quiz.getCreateAt();
-        entity.quiz1 = quiz.getQuiz1();
-        entity.quiz2 = quiz.getQuiz2();
-        entity.quiz3 = quiz.getQuiz3();
-        entity.quiz4 = quiz.getQuiz4();
-        entity.answer = quiz.getAnswer();
-        return entity;
+        return new QuizEntity(
+                quiz.getIdx(),
+                quiz.getTitle(),
+                quiz.getScore(),
+                toValue(quiz.getType()),
+                quiz.getCreateAt(),
+                quiz.getQuestion1(),
+                quiz.getQuestion2(),
+                quiz.getQuestion3(),
+                quiz.getQuestion4(),
+                quiz.getAnswer()
+        );
     }
 
     /**

@@ -13,10 +13,6 @@ import com.parkjin.quiz.util.SingleLiveEvent;
 
 import java.util.Date;
 
-import io.reactivex.Completable;
-import io.reactivex.Observable;
-import io.reactivex.Scheduler;
-import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -60,8 +56,7 @@ public class QuestionViewModel extends BaseViewModel {
                 .subscribe(
                         this::setQuizInfo,
                         error -> onErrorEvent.setValue(error.getMessage())
-                )
-        );
+                ));
     }
 
     public void insertQuiz(Quiz quiz) {
@@ -71,17 +66,16 @@ public class QuestionViewModel extends BaseViewModel {
                 .subscribe(
                         () -> onSuccessEvent.call(),
                         error -> onErrorEvent.setValue(error.getMessage())
-                )
-        );
+                ));
     }
 
     private void setQuizInfo(Quiz quiz) {
         title.postValue(quiz.getTitle());
         score.postValue(String.valueOf(quiz.getScore()));
-        quiz1.postValue(quiz.getQuiz1());
-        quiz2.postValue(quiz.getQuiz2());
-        quiz3.postValue(quiz.getQuiz3());
-        quiz4.postValue(quiz.getQuiz4());
+        quiz1.postValue(quiz.getQuestion1());
+        quiz2.postValue(quiz.getQuestion2());
+        quiz3.postValue(quiz.getQuestion3());
+        quiz4.postValue(quiz.getQuestion4());
 
         isQuizType.setValue(quiz.getType() == QuizType.IMAGE);
         onClickQuiz(quiz.getAnswer());
@@ -89,8 +83,9 @@ public class QuestionViewModel extends BaseViewModel {
 
     public void onClickSave() {
         if (title.getValue().isEmpty() || score.getValue().isEmpty() || quiz1.getValue().isEmpty() ||
-            quiz2.getValue().isEmpty() || quiz3.getValue().isEmpty() || quiz4.getValue().isEmpty()) {
-
+            quiz2.getValue().isEmpty() || quiz3.getValue().isEmpty() || quiz4.getValue().isEmpty() ||
+            answer.getValue() == null
+        ) {
             onErrorEvent.setValue("빈 칸 없이 입력해주세요");
             return;
         }

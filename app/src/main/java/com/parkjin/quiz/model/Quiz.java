@@ -7,15 +7,15 @@ public class Quiz {
     private final QuizType type;
     private final String createAt;
 
-    private final String quiz1;
-    private final String quiz2;
-    private final String quiz3;
-    private final String quiz4;
+    private final String question1;
+    private final String question2;
+    private final String question3;
+    private final String question4;
     private final int answer;
 
     public Quiz(
             int idx, String title, int score, QuizType type, String createAt,
-            String quiz1, String quiz2, String quiz3, String quiz4, int answer
+            String question1, String question2, String question3, String question4, int answer
     ) {
         this.idx = idx;
         this.title = title;
@@ -23,10 +23,10 @@ public class Quiz {
         this.type = type;
         this.createAt = createAt;
 
-        this.quiz1 = quiz1;
-        this.quiz2 = quiz2;
-        this.quiz3 = quiz3;
-        this.quiz4 = quiz4;
+        this.question1 = question1;
+        this.question2 = question2;
+        this.question3 = question3;
+        this.question4 = question4;
         this.answer = answer;
     }
 
@@ -50,20 +50,20 @@ public class Quiz {
         return createAt;
     }
 
-    public String getQuiz1() {
-        return quiz1;
+    public String getQuestion1() {
+        return question1;
     }
 
-    public String getQuiz2() {
-        return quiz2;
+    public String getQuestion2() {
+        return question2;
     }
 
-    public String getQuiz3() {
-        return quiz3;
+    public String getQuestion3() {
+        return question3;
     }
 
-    public String getQuiz4() {
-        return quiz4;
+    public String getQuestion4() {
+        return question4;
     }
 
     public int getAnswer() {
