@@ -37,7 +37,7 @@ public class QuizViewModel extends BaseViewModel {
     public MutableLiveData<Boolean> quiz4Checked = new MutableLiveData<>(false);
     public MutableLiveData<Integer> answer = new MutableLiveData<>();
 
-    public MutableLiveData<String> totalScore = new MutableLiveData<>("");
+    public MutableLiveData<String> totalScore = new MutableLiveData<>("문제가 없습니다");
     public SingleLiveEvent<String> onRightEvent = new SingleLiveEvent<>();
     public SingleLiveEvent<String> onErrorEvent = new SingleLiveEvent<>();
 
