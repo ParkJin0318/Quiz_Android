@@ -58,11 +58,6 @@ public class QuizViewModel extends BaseViewModel {
     }
 
     private void setQuizInfo(Quiz quiz) {
-        if (!isEasyMode.getValue() && quiz.getType() == QuizType.IMAGE) {
-            idx ++;
-            getQuiz();
-            return;
-        }
         this.quiz = quiz;
         title.postValue(quiz.getTitle());
         score.postValue(quiz.getScore() + "점");
@@ -72,6 +67,7 @@ public class QuizViewModel extends BaseViewModel {
         quiz3.postValue(quiz.getQuestion3());
         quiz4.postValue(quiz.getQuestion4());
 
+        isEasyMode.setValue(quiz.getType() == QuizType.IMAGE);
         isQuizType.postValue(quiz.getType() == QuizType.IMAGE);
     }
 
